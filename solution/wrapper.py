@@ -87,7 +87,7 @@ def mitigate(call_next, question, config, context):
     conf = dict(config)
 
     # ── 4. Call agent with retry ──
-    max_retries = 2
+    max_retries = 5
     result = None
     last_error = None
     attempts_used = 0
@@ -108,7 +108,7 @@ def mitigate(call_next, question, config, context):
         except Exception as e:
             last_error = str(e)
             if attempt < max_retries - 1:
-                time.sleep(0.3)
+                time.sleep(2)
             continue
 
     wall_ms = int((time.time() - t0) * 1000)
